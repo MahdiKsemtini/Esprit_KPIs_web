@@ -1,0 +1,117 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentClasse.id">
+    <h4>Classe</h4>
+    <div>
+      <label><strong>Niveau:</strong></label> {{ currentClasse.niveau }}
+    </div>
+    <div>
+      <label><strong>Branche:</strong></label>
+      {{ currentClasse.branche }}
+    </div>
+    <div>
+      <label><strong>Numero:</strong></label>
+      {{ currentClasse.numero }}
+    </div>
+    <div>
+      <label><strong>Name:</strong></label>
+      {{ currentClasse.name }}
+    </div>
+    <div>
+      <label><strong>Nombre d'etudiant:</strong></label>
+      {{ currentClasse.nbEtudiant }}
+    </div>
+    <div>
+      <label><strong>Scholar year:</strong></label>
+      {{ currentClasse.year }}
+    </div>
+    <a class="btn btn-success" routerLink="/classes/{{ currentClasse.id }}">
+      Edit
+    </a>
+    <!--<button style="margin:5px;" class="btn btn-danger" (click)="deleteClasse()">
+        Delete
+      </button>-->
+  </div>
+  <div *ngIf="!currentClasse">
+    <br />
+    <p>Please click on a Classe...</p>
+  </div>
+</div>
+<ng-template #editable>
+  <div *ngIf="currentClasse.id" class="edit-form">
+    <div class="row">
+
+      <div class="col-4">
+        <h4>Classe</h4>
+        <form>
+          <div class="form-group">
+            <label for="niveau">Niveau</label>
+            <input type="text" class="form-control" id="niveau" [(ngModel)]="currentClasse.niveau" name="niveau" />
+          </div>
+          <div class="form-group">
+            <label for="branche">Branche</label>
+            <input type="text" class="form-control" id="branche" [(ngModel)]="currentClasse.branche" name="branche" />
+          </div>
+          <div class="form-group">
+            <label for="numero">Numero</label>
+            <input type="text" class="form-control" id="numero" [(ngModel)]="currentClasse.numero" name="numero" />
+          </div>
+          <div class="form-group">
+            <label for="nbEtudiant">Nombre d'étudiant</label>
+            <input type="text" class="form-control" id="nbEtudiant" [(ngModel)]="currentClasse.nbEtudiant"
+              name="nbEtudiant" />
+          </div>
+          <div class="form-group">
+            <label for="year">Scholar year</label>
+            <input type="text" class="form-control" id="year" [(ngModel)]="currentClasse.year" name="year" />
+          </div>
+        </form>
+        <button style="margin:5px;" class="btn btn-danger" (click)="deleteClasse()">
+          Delete
+        </button>
+        <button type="submit" class="btn btn-success" (click)="updateClasse()">
+          Update
+        </button>
+        <p>{{ message }}</p>
+      </div>
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th scope="col">Cin</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of students 
+              let i = index" [class.active]="i == currentIndex" (click)="setActiveStudent(student, i)">
+                  <td>{{ student.cin }}</td>
+                  <td> {{ student.firstName }}</td>
+                  <td>{{ student.lastName }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>
+                    <span>
+                      <a href="students/{{student.id}}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-address-card"></i>
+                      </a>
+                    </span>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!currentClasse.id">
+    <br />
+    <p>Cannot access this Classe...</p>
+  </div>
+</ng-template>

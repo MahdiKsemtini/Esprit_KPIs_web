@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-8">
+    <div class="col-3 mx-auto" style="margin-bottom: 10px;">
+      <a href="addStudent" class="btn btn-sm bg-teal" style="margin: 5px;">
+        <i class="fas fa-plus"></i> Add
+      </a>
+      <a href="importStudents" class="btn btn-sm btn-primary">
+        <i class="fas fa-download"></i> Import
+      </a>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Students List</h3>
+        
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search"
+              [(ngModel)]="email">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default" (click)="searchEmail()">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th scope="col">Cin</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Phone N°</th>
+              <th scope="col">Classe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students | paginate
+          : {
+              itemsPerPage: 6,
+              currentPage: page,
+              totalItems: count
+            }; 
+            let i = index" [class.active]="i == currentIndex" (click)="setActiveStudent(student, i)">
+              <td>{{ student.cin }}</td>
+              <td> {{ student.firstName }}</td>
+              <td>{{ student.lastName }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.phone }}</td>
+              <td>{{ student.classe?.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <app-student-details [viewMode]="true" [currentStudent]="currentStudent"></app-student-details>
+  </div>
+</div>

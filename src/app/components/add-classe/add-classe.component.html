@@ -1,0 +1,58 @@
+<div *ngIf="badRequest" class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h5>Class already exists.</h5>
+</div>
+
+
+  <div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Add Class</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="niveau">Niveau</label>
+            <input type="number" class="form-control" id="niveau" required [(ngModel)]="classe.niveau" name="niveau"
+              min="1" max="5" />
+          </div>
+          <div class="form-group">
+            <label for="branche">Branche</label>
+            <select class="custom-select" id="branche" required [(ngModel)]="classe.branche" name="branche">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="P">P</option>
+              <option value="SAE">SAE</option>
+              <option value="SE">SE</option>
+              <option value="SIM">SIM</option>
+              <option value="DS">DS</option>
+              <option value="SLEAM">SLEAM</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="numero">Numero</label>
+            <input type="number" class="form-control" id="numero" required [(ngModel)]="classe.numero" name="numero"
+              min="1" max="50" />
+          </div>
+          <div class="form-group">
+            <label for="nbEtudiant">Nombre Max d'étudiant</label>
+            <input type="number" class="form-control" id="nbEtudiant" required [(ngModel)]="classe.nbEtudiant"
+              name="nbEtudiant" min="1" max="40" />
+          </div>
+          <div class="form-group">
+            <label for="year">Scholar year</label>
+            <input type="text" class="form-control" id="year" required [(ngModel)]="classe.year" name="year" />
+          </div>
+
+          <button (click)="saveClasse()" class="btn btn-success">Submit</button>
+        </div>
+      </div>
+      </div>
+      <div *ngIf="submitted ">
+        <h4>This class was created successfully!</h4>
+        <button class="btn btn-success" (click)="newClasse()">Add</button>
+      </div>
+    </div>
+  </div>

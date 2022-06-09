@@ -1,0 +1,38 @@
+.list {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+  }
+
+  .column {
+    float: left;
+  }
+  
+  .left {
+    width: 25%;
+  }
+  
+  .right {
+    width: 75%;
+  }
+
+  .float-container {
+    border: 3px solid #fff;
+  }
+
+  .float-child {
+    padding: 10px;
+    float: left;
+  }  
+  td 
+  {
+      height: 50px; 
+      width: 50px;
+      text-align: center; 
+      vertical-align: middle;
+  }
+  th
+  {
+      text-align: center; 
+      vertical-align: middle;
+  }

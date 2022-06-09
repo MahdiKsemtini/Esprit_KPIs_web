@@ -1,0 +1,109 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentStudent.id">
+    <h4>Student</h4>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-column align-items-center text-center">
+          <img src="http://localhost:3000/uploads/{{currentStudent.photo}}" alt="Student" class="rounded-circle"
+            width="150">
+          <div class="mt-3">
+            <h4>{{ currentStudent.firstName }} {{ currentStudent.lastName }}</h4>
+            <p class="text-secondary mb-1">{{ currentStudent.classe?.name }}</p>
+            <p class="text-muted font-size-sm">{{ currentStudent.email }}</p>
+            <p class="text-muted font-size-sm">{{ currentStudent.phone }}</p>
+            <button class="btn btn-primary" routerLink="/students/{{ currentStudent.id }}">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!currentStudent">
+    <br />
+    <p>Please click on a Student...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="submitted" class="alert_update">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{message}}
+  </div>
+  <div class="card">
+    <div class="container rounded bg-white mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img src="http://localhost:3000/uploads/{{currentStudent.photo}}" alt="Student" class="rounded-circle"
+            width="150">
+            <span class="font-weight-bold">{{ currentStudent.firstName }} {{ currentStudent.lastName }}</span>
+            <span class="text-black-50">{{ currentStudent.email }}</span>
+            <span class="text-black-50">+ 216 {{ currentStudent.phone }}</span>
+          </div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Student Profile</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6"><label class="labels">First Name</label>
+                <h4>{{ currentStudent.firstName }}</h4>
+              </div>
+              <div class="col-md-6"><label class="labels">Last Name</label>
+                <h4>{{ currentStudent.lastName }}</h4>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12"><label class="labels">E-mail</label>
+                <h4>{{ currentStudent.email }}</h4>
+              </div>
+              <div class="col-md-12"><label class="labels">CIN</label>
+                <h4>{{ currentStudent.cin }}</h4>
+              </div>
+              <div class="col-md-12"><label class="labels">Phone N°</label>
+                <h4>{{ currentStudent.phone }}</h4>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12"><label class="labels">Birth Date</label>
+                <h4>{{currentStudent.birthDate?.substring(0,10)}}</h4>
+              </div>
+              <div class="form-group">
+                <label for="branche">Change Class</label>
+                <select class="custom-select" id="classe" [(ngModel)]="currentStudent.classe" name="classe">
+                  <option *ngFor="let item of classes" [value]="item.id">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <button class="btn btn-success" style="margin:5px;" type="button"
+                (click)="updateStudent()">Update</button>
+              <button type="button" class="btn btn-danger" (click)="deleteStudent()">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Classe details</h4>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12"><label class="labels">Niveau</label>
+                <h4>{{ niveau }}</h4>
+              </div>
+              <div class="col-md-12"><label class="labels">Branche</label>
+                <h4>{{ branche }}</h4>
+              </div>
+              <div class="col-md-12"><label class="labels">Num</label>
+                <h4>{{ numero }}</h4>
+              </div>
+              <div class="col-md-12"><label class="labels">Scholar year</label>
+                <h4>{{ year }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,59 @@
+<div *ngIf="badRequest" class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <h5>E-mail already taken.</h5>
+</div>
+
+
+<div >
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="card card-success">
+        <div class="card-header">
+          <h3 class="card-title">Add student</h3>
+        </div>
+      
+      
+        <form>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="cin">CIN</label>
+              <input type="text" class="form-control" id="cin" required [(ngModel)]="student.cin" name="cin" placeholder="CIN" />
+            </div>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" style="text-transform: capitalize;" id="firstName" required
+                [(ngModel)]="student.firstName" name="firstName" placeholder="First name" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" style="text-transform: capitalize;" id="lastName" required
+                [(ngModel)]="student.lastName" name="lastName" placeholder="Last name" />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" class="form-control" id="email" required [(ngModel)]="student.email" name="email" placeholder="Enter email" />
+            </div>
+            <div class="form-group">
+              <label for="email">Phone N°</label>
+              <input type="text" class="form-control" id="phone" required [(ngModel)]="student.phone" name="phone" placeholder="Enter phone number" />
+            </div>
+            <div class="form-group">
+              <label for="birthDate">Birth Date</label>
+              <input type="date" class="form-control datetimepicker-input" id="birthDate" required [(ngModel)]="student.birthDate"
+                name="birthDate" />
+      
+            </div>
+      
+            <button (click)="saveStudent()" class="btn btn-success">Submit</button>
+          
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="submitted">
+      <h4>Student was created successfully!</h4>
+      <button class="btn btn-success" (click)="newStudent()">Add</button>
+    </div>
+  </div>
+</div>
+
